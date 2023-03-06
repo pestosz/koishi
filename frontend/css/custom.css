@@ -1,0 +1,135 @@
+.callendar {
+  height: 80vh;
+}
+
+.cal-block {
+  height: 15vh;
+}
+
+.cal-block:hover {
+  background-color: rgb(135, 162, 147);
+  transition: all 0.3s;
+}
+
+.task-list {
+  height: 80vh;
+  overflow-y: auto;
+}
+
+.task-entry-cont {
+  background: rgba(65, 92, 79, 0.837);
+  width: auto;
+  margin: 0.25rem;
+  padding: 0.25rem;
+  min-height: 5rem;
+  height: -webkit-fit-content;
+  height: -moz-fit-content;
+  height: fit-content;
+  display: flex;
+  flex-direction: column;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 1; /* number of lines to show */
+  line-clamp: 1;
+}
+
+.task-entry-cont:hover {
+  transition: all 0.3s;
+  background: rgba(51, 72, 60, 0.837);
+}
+
+.task-header {
+  color: rgb(255, 255, 255);
+  width: 90%;
+  margin: 0 auto;
+  text-align: center;
+  border-bottom: 1px solid rgb(230, 229, 229);
+  display: flex;
+  justify-content: space-between;
+}
+
+.task-content {
+  width: 90%;
+  margin: 0 auto;
+  color: white;
+  font-weight: 100;
+}
+
+.sticky {
+  position: -webkit-sticky; /* Safari */
+  position: sticky;
+  top: 0;
+}
+
+.h-100vh {
+  height: 100vh;
+}
+
+.b-primary {
+  background-color: rgb(68, 109, 90);
+}
+
+.b-site-b {
+  background: rgb(197, 230, 215);
+}
+
+.b-white {
+  background-color: white;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html, body, main {
+  background: rgb(197, 230, 215);
+}
+
+body::-webkit-scrollbar {
+  width: 2px; /* width of the entire scrollbar */
+}
+
+body::-webkit-scrollbar-track {
+  background: rgb(197, 230, 215); /* color of the tracking area */
+}
+
+body::-webkit-scrollbar-thumb {
+  background-color: rgb(29, 45, 38); /* color of the scroll thumb */
+  border-radius: 5px; /* roundness of the scroll thumb */
+}
+
+/*.animated-border{
+border-bottom:0 solid #292b2c;
+}
+.animated-border:hover{
+    border-bottom:0 solid #292b2c;
+
+}*/
+.menu {
+  background: rgb(68, 109, 90);
+}
+
+a.menu-item {
+  color: rgb(244, 244, 244);
+}
+
+a.menu-item:hover {
+  color: rgb(229, 228, 228);
+}
+
+.trademark {
+  font-size: 2em;
+  font-weight: bold;
+}
+
+.color-white {
+  color: white;
+}
+
+.cal-icon {
+  font-size: 20px;
+  color: white;
+  margin-right: 10px;
+  text-align: center;
+  align-self: center;
+}/*# sourceMappingURL=custom.css.map */

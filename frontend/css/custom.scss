@@ -1,0 +1,57 @@
+@use 'color-scheme' as *;
+@import 'callendar';
+@import 'login';
+@import 'tasklist';
+@import 'misc';
+
+//setup
+*{
+    box-sizing: border-box;   
+}
+
+html, body, main{
+    background: $main-background-color;
+}
+body::-webkit-scrollbar {
+    width: 2px;               /* width of the entire scrollbar */
+  }
+  
+  body::-webkit-scrollbar-track {
+    background: rgb(197, 230, 215);        /* color of the tracking area */
+  }
+  
+  body::-webkit-scrollbar-thumb {
+    background-color: rgb(29, 45, 38);    /* color of the scroll thumb */
+    border-radius: 5px;       /* roundness of the scroll thumb */
+  }
+
+/*.animated-border{
+border-bottom:0 solid #292b2c;
+}
+.animated-border:hover{
+    border-bottom:0 solid #292b2c;
+
+}*/
+.menu{
+    background:$dark-background-color;
+}
+a.menu-item{
+    color: $light-font-color;
+}
+a.menu-item:hover{
+    color: $light-font-color-hover;
+}
+.trademark{
+    font-size: 2em;
+    font-weight: bold;
+}
+.color-white{
+    color:white;
+}
+.cal-icon{
+    font-size: 20px;
+    color:white;
+    margin-right:10px;
+    text-align: center;
+    align-self: center;
+}

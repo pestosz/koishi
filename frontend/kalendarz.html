@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kalendarz view</title>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Bootstrap demo</title>
+    <script src="bootstrap5/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="bootstrap5/css/bootstrap.min.css">
+    <link rel="stylesheet" href="fontawesome-free-6.2.0-web/css/all.min.css">
+    <script src="fontawesome-free-6.2.0-web/js/all.min.js"></script>
+    <link rel="stylesheet" href="css/custom.css">
+
+
+
+</head>
+<body>
+    <header class="menu container-fluid">
+        <nav class="d-flex justify-content-between p-3">
+            <a class="menu-item trademark d-block logo text-decoration-none text-center" href="home.html">KOISHI</a>
+            <div><a class="cal-icon" href="kalendarz.html"><i class="fa-solid fa-calendar-days"></i></a><button class="btn btn-danger">Wyloguj</button></div>
+        </nav>
+    </header>
+    <main class="container">
+        <div class="container-fluid my-5">
+            <div class="m-auto d-flex w-25 justify-content-around align-items-center text-center">
+                <a><</a>12.2022<a>></a>
+            </div>
+        </div>
+        <div class="position-absolute w-50 h-100 bg-light border border-dark" id="overview">
+            <div class="w-75 text-center border-bottom border-dark m-auto py-2">data</div><a href="#" onclick="hideOverview()">zamknij</a>
+            <div class="mx-3 mt-5">
+                <div class="rounded bg-warning w-25 p-3"> treść przypomnienia </div>
+            </div>
+        </div>
+        <div class="callendar row wrap">
+            <div class="cal-block col-md-2 col-6 border-right border-dark" onclick="showOverview()">1</div>
+            <div class="cal-block col-md-2 col-6 border-right border-dark" onclick="showOverview()">2</div>
+            <div class="cal-block col-md-2 col-6 border-right border-dark" onclick="showOverview()">3</div>
+            <div class="cal-block col-md-2 col-6 border-right border-dark" onclick="showOverview()">4</div>
+            <div class="cal-block col-md-2 col-6 border-right border-dark" onclick="showOverview()">5</div>
+            <div class="cal-block col-md-2 col-6 border-right border-dark" onclick="showOverview()">6</div>
+            <div class="cal-block col-md-2 col-6 border-right border-dark" onclick="showOverview()">7</div>
+            <div class="cal-block col-md-2 col-6 border-right border-dark" onclick="showOverview()">8</div>
+            <div class="cal-block col-md-2 col-6 border-right border-dark" onclick="showOverview()">9</div>
+            <div class="cal-block col-md-2 col-6 border-right border-dark" onclick="showOverview()">10</div>
+            <div class="cal-block col-md-2 col-6 border-right border-dark" onclick="showOverview()">11</div>
+            <div class="cal-block col-md-2 col-6 border-right border-dark" onclick="showOverview()">12</div>
+            <div class="cal-block col-md-2 col-6 border-right border-dark" onclick="showOverview()">13</div>
+            <div class="cal-block col-md-2 col-6 border-right border-dark" onclick="showOverview()">14</div>
+            <div class="cal-block col-md-2 col-6 border-right border-dark" onclick="showOverview()">15</div>
+            <div class="cal-block col-md-2 col-6 border-right border-dark" onclick="showOverview()">16</div>
+            <div class="cal-block col-md-2 col-6 border-right border-dark" onclick="showOverview()">17</div>
+            <div class="cal-block col-md-2 col-6 border-right border-dark" onclick="showOverview()">18</div>
+            <div class="cal-block col-md-2 col-6 border-right border-dark" onclick="showOverview()">19</div>
+            <div class="cal-block col-md-2 col-6 border-right border-dark" onclick="showOverview()">20</div>
+            <div class="cal-block col-md-2 col-6 border-right border-dark" onclick="showOverview()">21</div>
+            <div class="cal-block col-md-2 col-6 border-right border-dark" onclick="showOverview()">22</div>
+            <div class="cal-block col-md-2 col-6 border-right border-dark" onclick="showOverview()">23</div>
+            <div class="cal-block col-md-2 col-6 border-right border-dark" onclick="showOverview()">24</div>
+            <div class="cal-block col-md-2 col-6 border-right border-dark" onclick="showOverview()">25</div>
+            <div class="cal-block col-md-2 col-6 border-right border-dark" onclick="showOverview()">26</div>
+            <div class="cal-block col-md-2 col-6 border-right border-dark" onclick="showOverview()">27</div>
+            <div class="cal-block col-md-2 col-6 border-right border-dark" onclick="showOverview()">28</div>
+            <div class="cal-block col-md-2 col-6 border-right border-dark" onclick="showOverview()">29</div>
+            <div class="cal-block col-md-2 col-6 border-right border-dark" onclick="showOverview()">30</div>
+            <div class="cal-block col-md-2 col-6 border-right border-dark" onclick="showOverview()">31</div>
+        </div>
+    </main>
+</body>
+<script>
+    function showOverview(){
+        document.querySelector("#overview").style.display="block";
+    }
+    function hideOverview(){
+        document.querySelector("#overview").style.display="none";
+    }
+</script>
+</html>

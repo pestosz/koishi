@@ -1,0 +1,18 @@
+@use 'color-scheme' as *;
+.sticky{
+    position: -webkit-sticky; /* Safari */
+    position: sticky;
+    top: 0;
+}
+.h-100vh{
+    height:100vh;
+}
+.b-primary{
+    background-color:$dark-background-color;
+}
+.b-site-b{
+    background: $main-background-color;
+}
+.b-white{
+    background-color: white;
+}
