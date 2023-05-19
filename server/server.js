@@ -14,4 +14,11 @@ app.use(express.json())
 const remindersRouter = require('./routes/reminders')
 app.use('/reminders', remindersRouter)
 
+//api:
+
+app.get('/', (req, res) => {
+    res.send('Please use /api/event');
+});
+
+//start server
 app.listen(3000, () => console.log('Server Started'))
