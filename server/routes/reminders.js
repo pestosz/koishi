@@ -11,6 +11,14 @@ router.get('/', async (req, res) => {
     res.status(500).json({ message: err.message })
   }
 })
+router.get('/test', async (req, res) => {
+  try {
+    const reminder = await reminders.find()
+    res.json(reminder)
+  } catch (err) {
+    res.status(500).json({ message: err.message })
+  }
+})
 
 // Getting One
 router.get('/:id', getReminder, (req, res) => {

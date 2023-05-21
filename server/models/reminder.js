@@ -1,17 +1,21 @@
 const mongoose = require('mongoose')
+const timestamp = require('mongoose-timestamp')
 
 const reminderSchema = new mongoose.Schema({
   name: {
     type: String,
-    required: true
+    required: true,
+    trim: false
   },
   content: {
     type: String,
-    required: true
+    required: true,
+    trim: false
   },
   data: {
     type: Date,
-    required: true
+    required: true,
+    trim: false
   },
   istodo: {
     type: Boolean,
@@ -19,5 +23,5 @@ const reminderSchema = new mongoose.Schema({
     default: false
   }
 })
-
+reminderSchema.plugin(timestamp)
 module.exports = mongoose.model('Reminder', reminderSchema)
