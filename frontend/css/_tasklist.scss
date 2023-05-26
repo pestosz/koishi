@@ -67,3 +67,28 @@
     position: relative;
     z-index: 3;
 }
+
+.edit-form-container{
+    position:absolute;
+    z-index:4;
+    top:0;
+    left:0;
+
+    margin: 5vh 32.5vw;
+    width: 35vw;
+    height:90vh;
+    background: rgb(137, 170, 77);
+
+    display:none;
+}
+
+#edit-form{
+    display:flex;
+    justify-content:center;
+    flex-direction:column;
+    width:100%;
+    input, textarea{
+        background:rgb(138, 167, 83);
+        border:none;
+    }
+}

@@ -61,7 +61,7 @@ router.patch('/:id', getReminder, async (req, res) => {
   }
   try {
     const updatedReminder = await res.reminder.save()
-    res.json(updatedReminder)
+    res.status(200).json(updatedReminder)
   } catch (err) {
     res.status(400).json({ message: err.message })
   }
@@ -70,7 +70,6 @@ router.patch('/:id', getReminder, async (req, res) => {
 // Deleting One
 router.delete('/:id', getReminder, async (req, res) => {
   try {
-    //let id = req.params.id
     await res.reminder.remove()
     res.status(200).json({ message: 'Deleted Reminder' })
   } catch (err) {
