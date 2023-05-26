@@ -3,6 +3,8 @@
     overflow-y:auto;
 }
 .task-entry-cont{
+    position:relative;
+    z-index:1;
     background:rgba(65, 92, 79, 0.837);
     width:auto;
     margin:0.25rem;
@@ -19,7 +21,6 @@
     -webkit-box-orient: vertical;
     &:hover{
         transition:all 0.3s;
-        background:rgba(51, 72, 60, 0.837);
     }
     
 }
@@ -38,4 +39,31 @@
     margin: 0 auto;
     color:white;
     font-weight: 100;
+}
+.task-overlay{
+    transition:all 0.1s;
+
+    opacity: 0;
+    position:absolute;
+    top:0;
+    left:0;
+    z-index: 2;
+    background:rgba(51, 72, 60, 0.837);
+    padding:0.25rem 1rem;
+
+    &:hover{
+        transition:all 0.1s;
+    
+        opacity: 1.0;
+    }
+    &>button{
+        height:50%;
+        width:5rem;
+        margin: 0px 0.5rem 0 0.5rem;
+    }
+}
+
+.b-site-b{
+    position: relative;
+    z-index: 3;
 }

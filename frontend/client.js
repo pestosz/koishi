@@ -15,12 +15,19 @@ function getRemindersAll(){
 						_block.classList.add("task-overdue") //kolor tła:czerwony
 					}
 
-					console.log(row.data)
+					//console.log(row.data)
+					//console.log(row)
+
 					_block.innerHTML=`<div class="task-header text-uppercase">`+
 						`<div class="task-title">${row.name}</div>`+
 						`<div class="task-deadline">${dateToDays(row.data)}</div>`+
 					'</div>'+
-					`<div class="task-content pt-2">${row.content}</div>`;
+					`<div class="task-content pt-2">${row.content}</div>`+
+					`<div class="task-overlay rounded d-flex flex-row justify-content-center align-items-center w-100 h-100">`+
+						`<button class="btn-warning" type="button" onclick="editForm('${row._id}')">edit</button>`+
+						`<button class="btn-success" type="button" onclick="markAsDone('${row._id}')">done</button>`+
+						`<button class="btn-danger" type="button" onclick="deleteReminder('${row._id}')">delete</button>`+
+					`</div>`;
 					container.appendChild(_block)
 				}
 			});
@@ -83,6 +90,24 @@ function reloadReminders(){
 		}
 	}
 	getRemindersAll()
+}
+
+async function deleteReminder(id){
+	let data={
+		delete_id: `${id}`
+	}
+	let response = await fetch(`http://localhost:3000/reminders/${id}`, {
+	  method: "DELETE", // *GET, POST, PUT, DELETE, etc.
+	});
+
+	console.log(response)
+	for(;;){
+		if(response.status=="200"){
+			reloadReminders()
+			break
+		}
+	}
+	
 }
 
 /*function renderReminders(){

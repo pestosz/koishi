@@ -25,18 +25,23 @@
         <div class="row">
             <section id="task-list" class="col-md-7 border-5 border-danger task-list">
                 <div class="h1 sticky text-center w-100 b-site-b">TO-DO</div>
-                <div class="task-entry-cont rounded">
+                <!--<div class="task-entry-cont rounded">
                     <div class="task-header text-uppercase">
                         <div class="task-title">test</div>
                         <div class="task-deadline">3 days</div>
                     </div>
                     <div class="task-content pt-2">Wyjąć tego zdechłego szczura z lodówki (leży dość długo i zaczyna chyba pleśnieć)</div>
-                </div>
+                    <div class="task-overlay rounded d-flex flex-row justify-content-center align-items-center w-100 h-100">
+                        <button class="btn-warning" type="button" onclick="editForm(${row.id})">edit</button>
+                        <button class="btn-success" type="button" onclick="markAsDone(${row.id})">done</button>
+                        <button class="btn-danger" type="button" onclick="deleteReminder(${row.id})">delete</button>
+                    </div>
+                </div>-->
 
             </section>
             <section class="col-md-5 border-1">
                 <div class="h1 text-center w-100 ">QUICK-ADD</div>
-                <form action="http://localhost:3000/add" method="POST">
+                <form action="http://localhost:3000/reminders/add" method="POST">
                     <input type="date" name="data" id="data">
                     <!--<input type="time" name="time" id="f-time">-->
                     <input type="text" name="name" id="name">

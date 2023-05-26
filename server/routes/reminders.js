@@ -70,8 +70,9 @@ router.patch('/:id', getReminder, async (req, res) => {
 // Deleting One
 router.delete('/:id', getReminder, async (req, res) => {
   try {
+    //let id = req.params.id
     await res.reminder.remove()
-    res.json({ message: 'Deleted Reminder' })
+    res.status(200).json({ message: 'Deleted Reminder' })
   } catch (err) {
     res.status(500).json({ message: err.message })
   }
