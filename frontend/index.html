@@ -12,23 +12,41 @@
     <script src="fontawesome-free-6.2.0-web/js/all.min.js"></script>
 
     <link rel="stylesheet" href="css/custom.css">
-</head>
-<body class="b-site-b">
-    <main class="container d-flex justify-content-center align-items-center h-100vh">
-        <form class="login-form b-white border-dark rounded p-5 shadow">
-            <div class="animated-border text-center border-bottom border-dark pb-2">Zaloguj się</div>
-            <div class="mt-5 d-flex flex-column justify-content-center align-items-center">
-                <div class="d-flex justify-content-around my-2 w-75">
-                    <div><i class="fa-regular fa-user"></i></div>
-                    <div><input type="text" name="" id="login" placeholder="Login"></div>
+</head> 
+<body>
+    <header class="menu container-fluid">
+        <nav class="d-flex justify-content-between p-3">
+            <a class="menu-item trademark d-block logo text-decoration-none text-center">KOISHI</a>
+            <div><a class="cal-icon" href="kalendarz.html"><i class="fa-solid fa-calendar-days"></i></a>
+            <button class="btn btn-danger">Wyloguj</button></div>
+        </nav>
+    </header>
+    <main class="container my-5">
+        <div class="row">
+            <section id="task-list" class="col-md-7 border-5 border-danger task-list">
+                <div class="h1 sticky text-center w-100 b-site-b">TO-DO</div>
+                <div class="task-entry-cont rounded">
+                    <div class="task-header text-uppercase">
+                        <div class="task-title">test</div>
+                        <div class="task-deadline">3 days</div>
+                    </div>
+                    <div class="task-content pt-2">Wyjąć tego zdechłego szczura z lodówki (leży dość długo i zaczyna chyba pleśnieć)</div>
                 </div>
-                <div class="d-flex justify-content-around my-2 w-75">
-                    <div><i class="fa-solid fa-key"></i></div>
-                    <div><input type="text" name="" id="password" placeholder="Hasło"></div>
-                </div>
-                <div class="my-2"><input type="checkbox" name="" id=""> Bardzo chcę otrzymywać powiadomienia! Spamcie mi!!</div>
-            </div>
-        </form>
+
+            </section>
+            <section class="col-md-5 border-1">
+                <div class="h1 text-center w-100 ">QUICK-ADD</div>
+                <form action="http://localhost:3000/add" method="POST">
+                    <input type="date" name="data" id="data">
+                    <!--<input type="time" name="time" id="f-time">-->
+                    <input type="text" name="name" id="name">
+                    <textarea name="content" id="content" cols="51" rows="10" placeholder="Description"></textarea>
+                    <input type="button" value="ADD TASK" onclick="addReminder()">
+                </form>
+            </section>
+        </div>
+
     </main>
+    <script src="client.js"></script>
 </body>
 </html>

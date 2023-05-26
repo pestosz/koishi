@@ -6,7 +6,7 @@ const mongoose = require('mongoose')
 const cors = require('cors')
 
 let corsOptions = {
-    origin : ['http://localhost:5500'],
+    origin : ['http://127.0.0.1:5500'],
 }    
 
 mongoose.connect(process.env.DATABASE_URL, { useNewUrlParser: true, useUnifiedTopology: true })
@@ -21,6 +21,7 @@ app.use(cors(corsOptions))
 app.use(function (req, res, next) {
     res.header('Access-Control-Allow-Origin', "http://127.0.0.1:5500");
     res.header('Access-Control-Allow-Headers', true);
+    res.header('Access-Control-Allow-Body', true);
     res.header('Access-Control-Allow-Credentials', true);
     res.header('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');
     next();

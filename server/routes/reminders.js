@@ -1,6 +1,9 @@
 const express = require('express')
 const router = express.Router()
 const reminders = require('../models/reminder')
+const bodyParser = require("body-parser")
+
+let urlencodedParser = bodyParser.urlencoded({extended: false})
 
 // Getting all
 router.get('/', async (req, res) => {
@@ -26,13 +29,14 @@ router.get('/:id', getReminder, (req, res) => {
 })
 
 // Creating one
-router.post('/', async (req, res) => {
+router.post('/add', async (req, res) => {
   const neureminder = new reminders({
     name: req.body.name,
     content: req.body.content,
     data: req.body.data,
     istodo: req.body.istodo
   })
+  console.log(neureminder)
   try {
     const newReminder = await neureminder.save()
     res.status(201).json(newReminder)
