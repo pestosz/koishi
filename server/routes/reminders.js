@@ -1,20 +1,9 @@
 const express = require('express')
 const router = express.Router()
 const reminders = require('../models/reminder')
-const bodyParser = require("body-parser")
-
-let urlencodedParser = bodyParser.urlencoded({extended: false})
 
 // Getting all
 router.get('/', async (req, res) => {
-  try {
-    const reminder = await reminders.find()
-    res.json(reminder)
-  } catch (err) {
-    res.status(500).json({ message: err.message })
-  }
-})
-router.get('/test', async (req, res) => {
   try {
     const reminder = await reminders.find()
     res.json(reminder)
@@ -29,14 +18,13 @@ router.get('/:id', getReminder, (req, res) => {
 })
 
 // Creating one
-router.post('/add', async (req, res) => {
+router.post('/', async (req, res) => {
   const neureminder = new reminders({
     name: req.body.name,
     content: req.body.content,
     data: req.body.data,
     istodo: req.body.istodo
   })
-  console.log(neureminder)
   try {
     const newReminder = await neureminder.save()
     res.status(201).json(newReminder)
@@ -61,7 +49,7 @@ router.patch('/:id', getReminder, async (req, res) => {
   }
   try {
     const updatedReminder = await res.reminder.save()
-    res.status(200).json(updatedReminder)
+    res.json(updatedReminder)
   } catch (err) {
     res.status(400).json({ message: err.message })
   }
@@ -71,7 +59,7 @@ router.patch('/:id', getReminder, async (req, res) => {
 router.delete('/:id', getReminder, async (req, res) => {
   try {
     await res.reminder.remove()
-    res.status(200).json({ message: 'Deleted Reminder' })
+    res.json({ message: 'Deleted Reminder' })
   } catch (err) {
     res.status(500).json({ message: err.message })
   }

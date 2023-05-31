@@ -1,4 +1,4 @@
-GET http://localhost:3000/reminders/63ce5b92299bb98bc4ddd3e6
+GET http://localhost:3000/reminders/
 
 ###
 
@@ -8,13 +8,13 @@ Content-Type: application/json
 {
     "name": "abc",
     "content": "abcdef",
-    "data": "2016-05-18T16:00:00Z",
+    "data": "2016-05-18T16:00:00",
     "istodo": true
 }
 
 ###
 
-DELETE http://localhost:3000/reminders/63ce6a2d18e90c2d802bcfc9
+DELETE http://localhost:3000/reminders/63ce5b92299bb98bc4ddd3e6
 
 ###
 
@@ -22,8 +22,8 @@ PATCH http://localhost:3000/reminders/63ce5b92299bb98bc4ddd3e6
 Content-Type: application/json
 
 {
-    "name": "fumo",
-    "content": "fumo"
+    "name": "koishi",
+    "content": "test"
 }
 
 ###

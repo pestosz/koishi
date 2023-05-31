@@ -58,6 +58,17 @@ function validateTime(date1, date2){
 
 }
 
+function calculateTimeDifference(date) {
+	Date.parse(date);
+	var currentDate = new Date();
+	var difference = currentDate.getTime() - date.getTime();
+	var seconds = Math.floor(difference / 1000);
+	var minutes = Math.floor(seconds / 60);
+	var hours = Math.floor(minutes / 60);
+	var days = Math.floor(hours / 24);
+  
+	return days + " days, " + hours % 24 + " hours, " + minutes % 60 + " minutes, and " + seconds % 60 + " seconds";
+}
 
 async function addReminder() {
 	// Default options are marked with *
