@@ -16,7 +16,8 @@
     "mongoose": "^5.5.7",
     "mongoose-timestamp": "^0.6.0",
     "restify": "^11.1.0",
-    "restify-errors": "^8.0.2"
+    "restify-errors": "^8.0.2",
+    "mysql": "^2.18.1"
   },
   "devDependencies": {
     "dotenv": "^8.0.0",

@@ -4,12 +4,26 @@ const express = require('express')
 const app = express()
 const mongoose = require('mongoose')
 const cors = require('cors')
+const mysql = require("mysql")
 
 let corsOptions = {
     origin : ['http://127.0.0.1:5500'],
 }    
 
-mongoose.connect(process.env.DATABASE_URL, { useNewUrlParser: true, useUnifiedTopology: true })
+const mysqldb = mysql.createPool({
+    connectionLimit: 100,
+    host: "127.0.0.1",       //localhost
+    user: "root",            //root
+    password: "",            //no pass
+    database: "koishi",      //db name
+    port: "3306"             //3306 default
+ })
+ mysqldb.getConnection( (err, connection)=> {
+    if (err) throw (err)
+    console.log ("DB connected successfully: " + connection.threadId)
+ })
+
+mongoose.connect("mongodb+srv://pestosz:pestosz@cluster0.sqwp9xj.mongodb.net/koishi?authMechanism=DEFAULT", { useNewUrlParser: true, useUnifiedTopology: true })
 const db = mongoose.connection
 db.on('error', (error) => console.error(error))
 db.once('open', () => console.log('Connected to Database'))
@@ -39,3 +53,41 @@ app.use('/reminders', remindersRouter)
 
 //start server
 app.listen(3000, () => console.log('Server Started'))
+
+const bcrypt = require("bcrypt")
+
+app.use(express.json())
+//middleware to read req.body.<params>
+//CREATE USER
+app.post("/createUser", async (req,res) => {
+const user = req.body.name;
+const hashedPassword = await bcrypt.hash(req.body.password,10);
+mysqldb.getConnection( async (err, connection) => {
+ if (err) throw (err)
+ const sqlSearch = "SELECT * FROM credentials WHERE name = ?"
+ const search_query = mysql.format(sqlSearch,[user])
+ const sqlInsert = "INSERT INTO credentials VALUES (0,?,?)"
+ const insert_query = mysql.format(sqlInsert,[user, hashedPassword])
+ // ? will be replaced by values
+ // ?? will be replaced by string
+ await connection.query (search_query, async (err, result) => {
+  if (err) throw (err)
+  console.log("------> Search Results")
+  console.log(result.length)
+  if (result.length != 0) {
+   connection.release()
+   console.log("------> User already exists")
+   res.sendStatus(409) 
+  } 
+  else {
+   await connection.query (insert_query, (err, result)=> {
+   connection.release()
+   if (err) throw (err)
+   console.log ("--------> Created new User")
+   console.log(result.insertId)
+   res.sendStatus(201)
+  })
+ }
+}) //end of connection.query()
+}) //end of db.getConnection()
+}) //end of app.post()

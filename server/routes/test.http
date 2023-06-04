@@ -2,6 +2,16 @@ GET http://localhost:3000/reminders/
 
 ###
 
+POST http://localhost:3000/createUser
+Content-Type: application/json
+
+{
+    "name": "test",
+    "password": "testpass"
+}
+
+###
+
 POST http://localhost:3000/reminders
 Content-Type: application/json
 
