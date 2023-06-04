@@ -54,6 +54,7 @@ app.use('/reminders', remindersRouter)
 //start server
 app.listen(3000, () => console.log('Server Started'))
 
+//to nizej nie dzialalo w innym pliku wiec jest tu
 const bcrypt = require("bcrypt")
 
 app.use(express.json())
@@ -91,3 +92,35 @@ mysqldb.getConnection( async (err, connection) => {
 }) //end of connection.query()
 }) //end of db.getConnection()
 }) //end of app.post()
+
+app.post("/login", (req, res)=> {
+    const user = req.body.name
+    const password = req.body.password
+    mysqldb.getConnection ( async (err, connection)=> {
+     if (err) throw (err)
+     const sqlSearch = "Select * from credentials where name = ?"
+     const search_query = mysql.format(sqlSearch,[user])
+     await connection.query (search_query, async (err, result) => {
+      connection.release()
+      
+      if (err) throw (err)
+      if (result.length == 0) {
+       console.log("--------> User does not exist")
+       res.sendStatus(404)
+      } 
+      else {
+         const hashedPassword = result[0].password
+         console.log(hashedPassword)
+         //get the hashedPassword from result
+        if (await bcrypt.compare(password, hashedPassword)) {
+        console.log("---------> Login Successful")
+        res.send(`${user} is logged in!`)
+        } 
+        else {
+        console.log("---------> Password Incorrect")
+        res.send("Password incorrect!")
+        } //end of bcrypt.compare()
+      }//end of User exists i.e. results.length==0
+     }) //end of connection.query()
+    }) //end of db.connection()
+    }) //end of app.post()
