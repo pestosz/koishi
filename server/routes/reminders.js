@@ -18,7 +18,7 @@ router.get('/:id', getReminder, (req, res) => {
 })
 
 // Creating one
-router.post('/', async (req, res) => {
+router.post('/add', async (req, res) => {
   const neureminder = new reminders({
     name: req.body.name,
     content: req.body.content,

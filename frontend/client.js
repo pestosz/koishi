@@ -1,3 +1,7 @@
+var TOKEN = getCookie("token")
+console.log(TOKEN)
+
+
 getRemindersAll()
 function getRemindersAll(){
 	fetch("http://localhost:3000/reminders")
@@ -104,12 +108,12 @@ function clearForm(){
 function reloadReminders(){
 	const cont = document.querySelector("#task-list")
 	console.log(`długość dzieci: ${cont.children.length}`)
-	for(let i=1; i<cont.children.length; i++){ //obiekt 0 to napis TO-DO więc zaczynamy od i=1
+	for(let i=cont.children.length-1; i>=1; i--){ //obiekt 0 to napis TO-DO więc zaczynamy od i=1
 		console.log(i)
 		cont.children[i].remove()
 		// pętla się kończy o jedną iteracje za wcześnie; jeśli dodam do lenght 1 to idzie za daleko wtf
 	}
-	//getRemindersAll()
+	getRemindersAll()
 }
 
 async function deleteReminder(id){
@@ -197,7 +201,24 @@ async function editReminder(id){
 	for(;;){
 		if(response.status=="200"){
 			clearEditForm()
+			reloadReminders()
 			break
 		}
 	}
 }
+
+function getCookie(cname) {
+	let name = cname + "=";
+	let decodedCookie = decodeURIComponent(document.cookie);
+	let ca = decodedCookie.split(';');
+	for(let i = 0; i <ca.length; i++) {
+	  let c = ca[i];
+	  while (c.charAt(0) == ' ') {
+		c = c.substring(1);
+	  }
+	  if (c.indexOf(name) == 0) {
+		return c.substring(name.length, c.length);
+	  }
+	}
+	return "";
+  }

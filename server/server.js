@@ -41,12 +41,6 @@ app.use(function (req, res, next) {
     next();
 });
 
-//api:
-
-app.get('/api', (req, res) => {
-    res.send('Please use /api/event');
-});
-
 const remindersRouter = require('./routes/reminders')
 app.use('/reminders', remindersRouter)
 
