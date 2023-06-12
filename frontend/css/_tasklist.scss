@@ -1,5 +1,5 @@
 .task-list{
-    height:70vh;
+    height:60vh;
     overflow-y:auto;
 }
 .task-entry-cont{
@@ -38,7 +38,7 @@
     width:100%;
     margin: 0 auto;
     color:white;
-    font-weight: 100;
+    font-weight: 200;
 }
 .task-overlay{
     transition:all 0.1s;
@@ -91,4 +91,11 @@
         background:rgb(138, 167, 83);
         border:none;
     }
+}
+.task-done{
+    background-color: rgba(64, 66, 65, 0.837);
+}
+.task-overdue{
+    background-color: rgba(240, 57, 57, 0.837);
+    font-weight: 500;
 }

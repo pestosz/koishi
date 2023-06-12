@@ -4,22 +4,26 @@ console.log(TOKEN)
 
 getRemindersAll()
 function getRemindersAll(){
+	const filterToDo=document.querySelector("#to-do").checked;
+	const filterDone=document.querySelector("#done").checked;
+
 	fetch("http://localhost:3000/reminders")
 	.then(response => {
 		response.json()
 		.then((data) => {
 			const container = document.querySelector("#task-list")
-			let todoCounter=0
-			let doneCounter=0
+			let displayCounter=0
 			//console.log(data)
 			data.forEach(row => {
-				if (row.istodo==true){
-					todoCounter+=1
+				if ((row.istodo==true && filterToDo) || (row.istodo==false && filterDone)){
+					displayCounter+=1
 					let _block = document.createElement("div")
 					_block.classList.add("task-entry-cont")
 					_block.classList.add("rounded")
-					if(!validateTime(Date.now(), row.data)){//sprawdzenie, czy termin nie upłynął
+					if(!validateTime(row.data)&&row.istodo==true){//sprawdzenie, czy termin nie upłynął
 						_block.classList.add("task-overdue") //kolor tła:czerwony
+					}else if(row.istodo==false){
+						_block.classList.add("task-done") //kolor tła:szarawy
 					}
 
 					_block.innerHTML=`<div class="task-header text-uppercase">`+
@@ -33,14 +37,12 @@ function getRemindersAll(){
 						`<button class="btn-danger" type="button" onclick="deleteReminder('${row._id}')">delete</button>`+
 					`</div>`;
 					container.appendChild(_block)
-				}else{
-					doneCounter+=1
 				}
 			});
 
 			//if no reminders:
-			if(data == null || data==undefined||data.length==0|| (doneCounter>0 && todoCounter==0)){
-				//console.log("test")
+			if(data == null || data==undefined||data.length==0|| displayCounter<=0){
+				//console.log("no reminders")
 				let _block=document.createElement("div")
 				_block.innerHTML='<div class="task-entry-cont rounded bg-danger text-center justify-content-center color-white"><p>No reminders to display :(</p></div>'
 				container.appendChild(_block)
@@ -54,36 +56,61 @@ function getRemindersAll(){
 	}); // Catch errors
 }
 
-function dateToDays(date){
+function dateToDays(d){
+	let date = new Date(d);
+	let currentDate = new Date();
+	let difference = currentDate.getTime() - date.getTime();
+	let seconds = Math.floor(difference / 1000);
+	let minutes = Math.floor(seconds / 60);
+	let hours = Math.floor(minutes / 60);
+	let days = Math.floor(hours / 24);
+	
+	return days + " days, " + hours % 24 + " hours, " + minutes % 60 + " minutes";
 
 }
 
-function validateTime(date1, date2){
-
+function validateTime(d){
+	let date=new Date(d);
+	let currentDate = new Date();
+	let difference = currentDate.getTime() - date.getTime();
+	let seconds = Math.floor(difference / 1000);
+	let minutes = Math.floor(seconds / 60);
+	let hours = Math.floor(minutes / 60);
+	let days = Math.floor(hours / 24);
+	if(days<0 && minutes<=0){
+		return false;
+	}else{
+		return true;
+	}
 }
+/*function dateToDays(date){
+}
+function validateTime(date){
 
+}*/
 function calculateTimeDifference(date) {
 	Date.parse(date);
-	var currentDate = new Date();
-	var difference = currentDate.getTime() - date.getTime();
-	var seconds = Math.floor(difference / 1000);
-	var minutes = Math.floor(seconds / 60);
-	var hours = Math.floor(minutes / 60);
-	var days = Math.floor(hours / 24);
-  
-	return days + " days, " + hours % 24 + " hours, " + minutes % 60 + " minutes, and " + seconds % 60 + " seconds";
+	let currentDate = new Date();
+	let difference = currentDate.getTime() - date.getTime();
+	let seconds = Math.floor(difference / 1000);
+	let minutes = Math.floor(seconds / 60);
+	let hours = Math.floor(minutes / 60);
+	let days = Math.floor(hours / 24);
+	
+	return days + " days, " + hours % 24 + " hours, " + minutes % 60 + " minutes";
 }
 
 async function addReminder() {
 	// Default options are marked with *
-	let time = document.querySelector("#data").value
+	let czas = document.querySelector("#data").valueAsDate
 	const nazwa=document.querySelector("#name").value
 	const tresc = document.querySelector("#content").value
-
+	
+	//"2016-05-18T16:00:00.000Z"
 	let data={
 		name: `${nazwa}`,
 		content: `${tresc}`,
-		data: "2016-05-18T16:00:00.000Z",
+		data: `${czas}`,
 		istodo: true
 	}
 	const response = await fetch("http://localhost:3000/reminders/add", {
@@ -96,6 +123,7 @@ async function addReminder() {
 	});
 	clearForm()
 	reloadReminders()
+	console.log(czas)
 	//return response.json(); // parses JSON response into native JavaScript objects
 }
 
