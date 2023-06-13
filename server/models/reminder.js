@@ -2,6 +2,11 @@ const mongoose = require('mongoose')
 const timestamp = require('mongoose-timestamp')
 
 const reminderSchema = new mongoose.Schema({
+  user: {
+    type: String,
+    required: true,
+    trim: false
+  },
   name: {
     type: String,
     required: true,

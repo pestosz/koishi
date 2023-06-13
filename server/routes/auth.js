@@ -9,7 +9,7 @@ const verifyToken = (req, res, next) => {
   }
   try {
     const decoded = jwt.verify(token, "sci_zlota_szkola");
-    req.user = decoded;
+    //req.user = decoded;
   } catch (err) {
     return res.status(401).send("Invalid Token");
   }

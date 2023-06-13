@@ -3,7 +3,7 @@ GET http://localhost:3000/reminders/
 Content-Type: application/json
 
 {
-    "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjoidGVzdCIsImlhdCI6MTY4NjY3MzA5NywiZXhwIjoxNjg2NzU5NDk3fQ.vPrrdVlgJTdT3wOASvg1ASgGxQmFQBjGVp92cnxfXmE"
+    "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjoidGVzdCIsImlhdCI6MTY4NjY3OTk5NCwiZXhwIjoxNjg2NzY2Mzk0fQ.dp48fkVK9skB0fRhB761lBRRsa0ZYSp6EHoz4R3VOdc"
 }
 
 ###
@@ -32,6 +32,7 @@ POST http://localhost:3000/reminders
 Content-Type: application/json
 
 {
+    "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjoidGVzdCIsImlhdCI6MTY4NjY3OTk5NCwiZXhwIjoxNjg2NzY2Mzk0fQ.dp48fkVK9skB0fRhB761lBRRsa0ZYSp6EHoz4R3VOdc",
     "name": "abc",
     "content": "abcdef",
     "data": "2016-05-18T16:00:00",
