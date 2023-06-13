@@ -1,3 +1,5 @@
+//!!!teraz kazdy request sprawdza token!!!
+
 require('dotenv').config()
 
 const express = require('express')
@@ -52,8 +54,7 @@ app.listen(3000, () => console.log('Server Started'))
 const bcrypt = require("bcrypt")
 
 app.use(express.json())
-//middleware to read req.body.<params>
-//CREATE USER
+
 app.post("/createUser", async (req,res) => {
 const user = req.body.name;
 const hashedPassword = await bcrypt.hash(req.body.password,10);
@@ -63,8 +64,7 @@ mysqldb.getConnection( async (err, connection) => {
  const search_query = mysql.format(sqlSearch,[user])
  const sqlInsert = "INSERT INTO credentials VALUES (0,?,?)"
  const insert_query = mysql.format(sqlInsert,[user, hashedPassword])
- // ? will be replaced by values
- // ?? will be replaced by string
+ 
  await connection.query (search_query, async (err, result) => {
   if (err) throw (err)
   console.log("------> Search Results")
@@ -83,14 +83,11 @@ mysqldb.getConnection( async (err, connection) => {
    res.sendStatus(201)
   })
  }
-}) //end of connection.query()
-}) //end of db.getConnection()
-}) //end of app.post()
-
+}) 
+}) 
+}) 
 
 const generateAccessToken = require("./generateAccessToken")
-//import the generateAccessToken function
-//LOGIN (AUTHENTICATE USER, and return accessToken)
 app.post("/login", (req, res)=> {
 const user = req.body.name
 const password = req.body.password
@@ -108,7 +105,6 @@ if (result.length == 0) {
   } 
   else {
    const hashedPassword = result[0].password
-   //get the hashedPassword from result
 if (await bcrypt.compare(password, hashedPassword)) {
     console.log("---------> Login Successful")
     console.log("---------> Generating accessToken")
@@ -117,8 +113,10 @@ if (await bcrypt.compare(password, hashedPassword)) {
     res.json({accessToken: token})
    } else {
     res.send("Password incorrect!")
-   } //end of Password incorrect
-}//end of User exists
-}) //end of connection.query()
-}) //end of db.connection()
-}) //end of app.post()
+   } 
+}
+}) 
+}) 
+}) 
+
+

@@ -1,9 +1,10 @@
 const express = require('express')
 const router = express.Router()
 const reminders = require('../models/reminder')
+const auth = require("../routes/auth")
 
 // Getting all
-router.get('/', async (req, res) => {
+router.get('/', auth, async (req, res) => {
   try {
     const reminder = await reminders.find()
     res.json(reminder)
@@ -13,12 +14,12 @@ router.get('/', async (req, res) => {
 })
 
 // Getting One
-router.get('/:id', getReminder, (req, res) => {
+router.get('/:id', auth, getReminder, (req, res) => {
   res.json(res.reminder)
 })
 
 // Creating one
-router.post('/add', async (req, res) => {
+router.post('/add', auth, async (req, res) => {
   const neureminder = new reminders({
     name: req.body.name,
     content: req.body.content,
@@ -34,7 +35,7 @@ router.post('/add', async (req, res) => {
 })
 
 // Updating One
-router.patch('/:id', getReminder, async (req, res) => {
+router.patch('/:id', auth, getReminder, async (req, res) => {
   if (req.body.name != null) {
     res.reminder.name = req.body.name
   }
@@ -56,7 +57,7 @@ router.patch('/:id', getReminder, async (req, res) => {
 })
 
 // Deleting One
-router.delete('/:id', getReminder, async (req, res) => {
+router.delete('/:id', auth, getReminder, async (req, res) => {
   try {
     await res.reminder.remove()
     res.json({ message: 'Deleted Reminder' })

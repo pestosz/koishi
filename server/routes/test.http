@@ -1,4 +1,10 @@
+
 GET http://localhost:3000/reminders/
+Content-Type: application/json
+
+{
+    "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjoidGVzdCIsImlhdCI6MTY4NjY3MzA5NywiZXhwIjoxNjg2NzU5NDk3fQ.vPrrdVlgJTdT3wOASvg1ASgGxQmFQBjGVp92cnxfXmE"
+}
 
 ###
 
