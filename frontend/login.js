@@ -13,7 +13,7 @@ async function login(){
 	  },
 	  body: JSON.stringify(credentials),
 	}).then(response=>{
-		if(response.status!="400" && response.status!="404"){
+		if(response.status!="400" && response.status!="404" && response.status!="403"){
 			response.json().then(data=>{
 				let _token=data.accessToken
 				document.cookie = `token=${_token}`

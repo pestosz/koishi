@@ -7,7 +7,14 @@ function getRemindersAll(){
 	const filterToDo=document.querySelector("#to-do").checked;
 	const filterDone=document.querySelector("#done").checked;
 
-	fetch("http://localhost:3000/reminders")
+	let j={
+		token: `${TOKEN}`
+	}
+	fetch("http://localhost:3000/reminders",{
+		headers: {
+			"x-access-token": `${TOKEN}`,
+		}
+	})
 	.then(response => {
 		response.json()
 		.then((data) => {
@@ -28,7 +35,7 @@ function getRemindersAll(){
 
 					_block.innerHTML=`<div class="task-header text-uppercase">`+
 						`<div class="task-title">${row.name}</div>`+
-						`<div class="task-deadline">${dateToDays(row.data)}</div>`+
+						`<div class="task-deadline">${row.istodo ? dateToDays(row.data): "COMPLETED"}</div>`+
 					'</div>'+
 					`<div class="task-content pt-2">${row.content}</div>`+
 					`<div class="task-overlay rounded d-flex flex-row justify-content-center align-items-center w-100 h-100">`+
@@ -59,6 +66,9 @@ function getRemindersAll(){
 function dateToDays(d){
 	let date = new Date(d);
 	let currentDate = new Date();
+	console.log(d)
+	console.log(date)
+	console.log(currentDate)
 	let difference = currentDate.getTime() - date.getTime();
 	let seconds = Math.floor(difference / 1000);
 	let minutes = Math.floor(seconds / 60);
@@ -117,6 +127,7 @@ async function addReminder() {
 	  method: "POST", // *GET, POST, PUT, DELETE, etc.
 	  headers: {
 		"Content-Type": "application/json",
+		"x-access-token": `${TOKEN}`,
 		// 'Content-Type': 'application/x-www-form-urlencoded',
 	  },
 	  body: JSON.stringify(data), // body data type must match "Content-Type" header
@@ -147,6 +158,9 @@ function reloadReminders(){
 async function deleteReminder(id){
 	let response = await fetch(`http://localhost:3000/reminders/${id}`, {
 	  method: "DELETE", // *GET, POST, PUT, DELETE, etc.
+	  headers:{
+		"x-access-token": `${TOKEN}`,
+	  }
 	});
 
 	//console.log(response)
@@ -167,6 +181,7 @@ async function markAsDone(id){
 	  method: "PATCH", // *GET, POST, PUT, DELETE, etc.
 	  headers: {
 		"Content-Type": "application/json",
+		"x-access-token": `${TOKEN}`,
 		// 'Content-Type': 'application/x-www-form-urlencoded',
 	  },
 	  body: JSON.stringify(data), // body data type must match "Content-Type" header
@@ -183,7 +198,11 @@ async function markAsDone(id){
 async function editForm(id){
 	const formCont=document.querySelector("#edit-form-container")
 	formCont.style.display="block"
-	fetch(`http://localhost:3000/reminders/${id}`)
+	fetch(`http://localhost:3000/reminders/${id}`,{
+		headers:{
+			"x-access-token": `${TOKEN}`,
+		}
+	})
 	.then(response => {
 		response.json()
 		.then((data) => {
@@ -221,7 +240,8 @@ async function editReminder(id){
 	const response = await fetch(`http://localhost:3000/reminders/${id}`, {
 	  method: "PATCH", // *GET, POST, PUT, DELETE, etc.
 	  headers: {
-		"Content-Type": "application/json"
+		"Content-Type": "application/json",
+		"x-access-token": `${TOKEN}`,
 	  },
 	  body: JSON.stringify(data), // body data type must match "Content-Type" header
 	});
@@ -250,3 +270,7 @@ function getCookie(cname) {
 	}
 	return "";
   }
+function wyloguj(){
+	document.cookie = `token=${false}`
+	location.href = "login.html"
+}
