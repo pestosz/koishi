@@ -17,6 +17,7 @@ async function login(){
 			response.json().then(data=>{
 				let _token=data.accessToken
 				document.cookie = `token=${_token}`
+				document.cookie=`user=${login}`
 				location.href = "index.html"
 			})
 		}else{

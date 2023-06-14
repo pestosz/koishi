@@ -1,5 +1,7 @@
 var TOKEN = getCookie("token")
-console.log(TOKEN)
+var USER=getCookie("user")
+
+const udiv=document.querySelector("#userName").innerHTML=`logged as: ${USER}`
 
 
 getRemindersAll()
@@ -20,7 +22,7 @@ function getRemindersAll(){
 		.then((data) => {
 			const container = document.querySelector("#task-list")
 			let displayCounter=0
-			console.log(data)
+			//console.log(data)
 			
 			data.forEach(row => {
 				if ((row.istodo==true && filterToDo) || (row.istodo==false && filterDone)){
@@ -67,9 +69,9 @@ function getRemindersAll(){
 function dateToDays(d){
 	let date = new Date(d);
 	let currentDate = new Date();
-	console.log(`d string: ${d}`)
-	console.log(`date from string: ${date}`)
-	console.log(`current date: ${currentDate}`)
+	//console.log(`d string: ${d}`)
+	//console.log(`date from string: ${date}`)
+	//console.log(`current date: ${currentDate}`)
 	let difference = (-1)*(currentDate.getTime() - date.getTime());
 	let seconds = Math.floor(difference / 1000);
 	let minutes = Math.floor(seconds / 60);
@@ -118,6 +120,7 @@ async function addReminder() {
 	const tresc = document.querySelector("#content").value
 	
 	//"2016-05-18T16:00:00.000Z"
+	if(czas!=null && czas!=""){
 	let data={
 		name: `${nazwa}`,
 		content: `${tresc}`,
@@ -135,8 +138,10 @@ async function addReminder() {
 	});
 	clearForm()
 	reloadReminders()
-	console.log(czas)
 	//return response.json(); // parses JSON response into native JavaScript objects
+	}else{
+		alert("date is empty!")
+	}
 }
 
 function clearForm(){
@@ -147,9 +152,8 @@ function clearForm(){
 
 function reloadReminders(){
 	const cont = document.querySelector("#task-list")
-	console.log(`długość dzieci: ${cont.children.length}`)
+	//console.log(`długość dzieci: ${cont.children.length}`)
 	for(let i=cont.children.length-1; i>=1; i--){ //obiekt 0 to napis TO-DO więc zaczynamy od i=1
-		console.log(i)
 		cont.children[i].remove()
 		// pętla się kończy o jedną iteracje za wcześnie; jeśli dodam do lenght 1 to idzie za daleko wtf
 	}
@@ -210,9 +214,9 @@ async function editForm(id){
 			//console.log(data)
 			formCont.innerHTML=`
 			<form id="edit-form">
-			<input type="date" name="data" id="e-data" value="${data.data}">
-			<input type="text" name="name" id="e-name" value="${data.name}">
-			<textarea name="content" id="e-content" cols="40" rows="10" placeholder="Description">${data.content}</textarea><br>
+			<input type="date" name="data" id="e-data" value="${data.data}" required>
+			<input type="text" name="name" id="e-name" value="${data.name}" required>
+			<textarea name="content" id="e-content" cols="40" rows="10" placeholder="Description" required>${data.content}</textarea><br>
 			<button type="button" class="btn-success" onclick="editReminder('${id}')">Confirm</button>
 			<button type="button" onclick="clearEditForm()" class="btn-danger">Cancel</button>
 			</form>`;
@@ -232,7 +236,7 @@ async function editReminder(id){
 	const time = document.querySelector("#e-data").value
 	const nazwa=document.querySelector("#e-name").value
 	const tresc = document.querySelector("#e-content").value
-
+	if(time!=null && time!=""){
 	let data={
 		name: `${nazwa}`,
 		content: `${tresc}`,
@@ -255,6 +259,9 @@ async function editReminder(id){
 			break
 		}
 	}
+	}else{
+		alert("date is empty!")
+	}
 }
 
 function getCookie(cname) {
@@ -274,5 +281,7 @@ function getCookie(cname) {
   }
 function wyloguj(){
 	document.cookie = `token=${false}`
+	document.cookie = `user=${false}`
+
 	location.href = "login.html"
 }

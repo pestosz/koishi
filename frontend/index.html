@@ -18,6 +18,7 @@
         <nav class="d-flex justify-content-between p-3">
             <a class="menu-item trademark d-block logo text-decoration-none text-center">KOISHI</a>
             <div><!--<a class="cal-icon" href="kalendarz.html"><i class="fa-solid fa-calendar-days"></i></a>-->
+            <div id="userName">.</div>
             <button class="btn btn-danger" onclick="wyloguj()">Wyloguj</button></div>
         </nav>
     </header>
@@ -50,9 +51,9 @@
             <section class="col-md-5 border-1">
                 <div class="h1 text-center w-100 ">QUICK-ADD</div>
                 <form action="http://localhost:3000/reminders/add" method="POST">
-                    <input type="date" name="data" id="data">
+                    <input type="date" name="data" id="data" required>
                     <!--<input type="time" name="time" id="f-time">-->
-                    <input type="text" name="name" id="name">
+                    <input type="text" name="name" id="name" required>
                     <textarea name="content" id="content" cols="51" rows="10" placeholder="Description"></textarea>
                     <input type="button" value="ADD TASK" onclick="addReminder()">
                 </form>
