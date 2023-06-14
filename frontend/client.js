@@ -20,7 +20,8 @@ function getRemindersAll(){
 		.then((data) => {
 			const container = document.querySelector("#task-list")
 			let displayCounter=0
-			//console.log(data)
+			console.log(data)
+			
 			data.forEach(row => {
 				if ((row.istodo==true && filterToDo) || (row.istodo==false && filterDone)){
 					displayCounter+=1
@@ -66,23 +67,23 @@ function getRemindersAll(){
 function dateToDays(d){
 	let date = new Date(d);
 	let currentDate = new Date();
-	console.log(d)
-	console.log(date)
-	console.log(currentDate)
-	let difference = currentDate.getTime() - date.getTime();
+	console.log(`d string: ${d}`)
+	console.log(`date from string: ${date}`)
+	console.log(`current date: ${currentDate}`)
+	let difference = (-1)*(currentDate.getTime() - date.getTime());
 	let seconds = Math.floor(difference / 1000);
 	let minutes = Math.floor(seconds / 60);
 	let hours = Math.floor(minutes / 60);
 	let days = Math.floor(hours / 24);
 	
-	return days + " days, " + hours % 24 + " hours, " + minutes % 60 + " minutes";
+	return days + " days " + Math.abs(hours % 24) + " hours " + Math.abs(minutes % 60) + " minutes";
 
 }
 
 function validateTime(d){
 	let date=new Date(d);
 	let currentDate = new Date();
-	let difference = currentDate.getTime() - date.getTime();
+	let difference = (-1)*(currentDate.getTime() - date.getTime());
 	let seconds = Math.floor(difference / 1000);
 	let minutes = Math.floor(seconds / 60);
 	let hours = Math.floor(minutes / 60);
@@ -209,7 +210,7 @@ async function editForm(id){
 			//console.log(data)
 			formCont.innerHTML=`
 			<form id="edit-form">
-			<!--<input type="date" name="data" id="e-data" value="${data.data}">-->
+			<input type="date" name="data" id="e-data" value="${data.data}">
 			<input type="text" name="name" id="e-name" value="${data.name}">
 			<textarea name="content" id="e-content" cols="40" rows="10" placeholder="Description">${data.content}</textarea><br>
 			<button type="button" class="btn-success" onclick="editReminder('${id}')">Confirm</button>
@@ -228,13 +229,14 @@ function clearEditForm(){
 }
 
 async function editReminder(id){
-	//let time = document.querySelector("#e-data").value
+	const time = document.querySelector("#e-data").value
 	const nazwa=document.querySelector("#e-name").value
 	const tresc = document.querySelector("#e-content").value
 
 	let data={
 		name: `${nazwa}`,
-		content: `${tresc}`
+		content: `${tresc}`,
+		data: `${time}`
 	}
 
 	const response = await fetch(`http://localhost:3000/reminders/${id}`, {

@@ -6,7 +6,8 @@ const auth = require("../routes/auth")
 // Getting all
 router.get('/', auth, async (req, res) => {
   try {
-    const reminder = await reminders.find()
+    //const reminder = await reminders.find()
+    const reminder = await reminders.find({user: `${req.user.user}`})
     res.json(reminder)
   } catch (err) {
     res.status(500).json({ message: err.message })
@@ -21,12 +22,14 @@ router.get('/:id', auth, getReminder, (req, res) => {
 // Creating one
 router.post('/add', auth, async (req, res) => {
   const neureminder = new reminders({
-    user: auth.decoded,
+    //user: auth.decoded.user,
+    user: req.user.user,
     name: req.body.name,
     content: req.body.content,
     data: req.body.data,
     istodo: req.body.istodo
   })
+  console.log("new reminder created for: "+neureminder.user)
   try {
     const newReminder = await neureminder.save()
     res.status(201).json(newReminder)

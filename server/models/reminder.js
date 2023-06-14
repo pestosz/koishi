@@ -25,7 +25,7 @@ const reminderSchema = new mongoose.Schema({
   istodo: {
     type: Boolean,
     required: true,
-    default: false
+    default: true
   }
 })
 reminderSchema.plugin(timestamp)

@@ -11,6 +11,13 @@
   transition: all 0.3s;
 }
 
+/*.login-div{
+
+}*/
+.login-link {
+  color: black;
+}
+
 .task-list {
   height: 60vh;
   overflow-y: auto;

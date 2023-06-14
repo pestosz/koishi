@@ -35,19 +35,21 @@ async function register(){
 		name: `${login}`,
 		password: `${password}`
 	}
-	const response = await fetch("http://localhost:3000/createUser", {
+
+	await fetch("http://localhost:3000/createUser", {
 	  method: "POST", // *GET, POST, PUT, DELETE, etc.
 	  headers: {
 		"Content-Type": "application/json",
 	  },
 	  body: JSON.stringify(credentials),
 	}).then(response=>{
-		if(response.status!="400" && response.status!="404"){
-			response.json().then(data=>{
-				let _token=data.accessToken
+		if(response.status=="201"){
+			
+				/*let _token=data.accessToken
 				document.cookie = `token=${_token}`
-				location.href = "index.html"
-			})
+				location.href = "index.html"*/
+				formLogin()
+			
 		}else{
 			alert("User exists or some error occured")
 		}
